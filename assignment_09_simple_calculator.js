@@ -73,5 +73,117 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require("readline-sync");
+
+// Returns the formatted result of a / b to 2 decimal places if not a whole number.
+function formatResult(value) {
+  return Number.isInteger(value) ? String(value) : value.toFixed(2);
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function divide(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a / b;
+}
+
+function modulus(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a % b;
+}
+
+function exponentiate(a, b) {
+  return a ** b;
+}
+
+// Reads two numbers from the user.
+function readTwoNumbers() {
+  const a = Number(readlineSync.question("Enter first number: "));
+  const b = Number(readlineSync.question("Enter second number: "));
+  return [a, b];
+}
+
+// Prints the menu options.
+function printMenu() {
+  console.log("\n================================");
+  console.log("      SIMPLE CALCULATOR");
+  console.log("================================");
+  console.log("1. Addition");
+  console.log("2. Subtraction");
+  console.log("3. Multiplication");
+  console.log("4. Division");
+  console.log("5. Modulus");
+  console.log("6. Exponentiation");
+  console.log("7. Quit");
+}
+
+function main() {
+  let running = true;
+
+  while (running) {
+    printMenu();
+    const choice = readlineSync.question("Select an operation (1-7): ");
+    let a, b, result;
+
+    switch (choice) {
+      case "1":
+        [a, b] = readTwoNumbers();
+        console.log(`Result: ${a} + ${b} = ${formatResult(add(a, b))}`);
+        break;
+      case "2":
+        [a, b] = readTwoNumbers();
+        console.log(`Result: ${a} - ${b} = ${formatResult(subtract(a, b))}`);
+        break;
+      case "3":
+        [a, b] = readTwoNumbers();
+        console.log(`Result: ${a} * ${b} = ${formatResult(multiply(a, b))}`);
+        break;
+      case "4":
+        [a, b] = readTwoNumbers();
+        result = divide(a, b);
+        if (result === null) {
+          console.log("Error: Cannot divide by zero.");
+        } else {
+          console.log(`Result: ${a} / ${b} = ${formatResult(result)}`);
+        }
+        break;
+      case "5":
+        [a, b] = readTwoNumbers();
+        result = modulus(a, b);
+        if (result === null) {
+          console.log("Error: Cannot divide by zero.");
+        } else {
+          console.log(`Result: ${a} % ${b} = ${formatResult(result)} (remainder)`);
+        }
+        break;
+      case "6":
+        [a, b] = readTwoNumbers();
+        console.log(`Result: ${a} ** ${b} = ${formatResult(exponentiate(a, b))}`);
+        break;
+      case "7":
+        console.log("Goodbye!");
+        running = false;
+        break;
+      default:
+        console.log("Invalid choice. Please select a number from 1 to 7.");
+    }
+  }
+}
+
+main();
 
 
