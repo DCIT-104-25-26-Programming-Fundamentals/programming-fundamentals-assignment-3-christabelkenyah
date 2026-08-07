@@ -58,5 +58,61 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+const readlineSync = require("readline-sync");
+
+// PART A: Prints the multiplication table for a single number, 1 to 12.
+function printMultiplicationTable(number) {
+  console.log(`Multiplication Table for ${number}:`);
+  for (let i = 1; i <= 12; i++) {
+    console.log(`${number} x ${i} = ${number * i}`);
+  }
+}
+
+// PART B: Prints the multiplication tables for every number from 1 to n,
+// separated by a divider line.
+function printTablesUpTo(n) {
+  for (let num = 1; num <= n; num++) {
+    printMultiplicationTable(num);
+    if (num < n) {
+      console.log("---");
+    }
+  }
+}
+
+// Reads a positive integer. Returns null if the input is invalid.
+function readPositiveInt(prompt) {
+  const value = parseInt(readlineSync.question(prompt), 10);
+  if (!Number.isInteger(value) || value <= 0) {
+    return null;
+  }
+  return value;
+}
+
+function main() {
+  // ---------------- PART A ----------------
+  console.log("=== PART A: Single Table ===");
+  const number = readPositiveInt("Enter a number: ");
+
+  if (number === null) {
+    console.log("Error: please enter a positive integer.");
+    return;
+  }
+
+  printMultiplicationTable(number);
+
+  // ---------------- PART B ----------------
+  console.log("\n=== PART B: Bonus - Tables from 1 to N ===");
+  const n = readPositiveInt("Enter a number N: ");
+
+  if (n === null) {
+    console.log("Error: N must be a positive integer.");
+    return;
+  }
+
+  printTablesUpTo(n);
+}
+
+main();
+
 
 
